@@ -48,7 +48,12 @@ body {
 	height: 600px;
 	width: 2400px;
 	font-size: 0;
+
 	-webkit-transform: translateX(-800px);
+	-o-transform: translateX(-800px);
+	-moz-transform: translateX(-800px);
+	-ms-transform: translateX(-800px);
+	transform: translateX(-800px);
 }
 
 .right {

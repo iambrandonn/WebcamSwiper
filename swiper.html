@@ -22,96 +22,9 @@
 	<video autoplay></video>
 
 	<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+	<script src="modernizr-2.6.2.js"></script>
+	<script src="demo.js"></script>
 	<script>
-		// Determine which transition event to listen for if supported
-		var el = document.createElement('fakeelement');
-		var transitions = {
-			'transition':'transitionEnd',
-			'OTransition':'oTransitionEnd',
-			'MSTransition':'msTransitionEnd',
-			'MozTransition':'transitionend',
-			'WebkitTransition':'webkitTransitionEnd'
-		};
-		for(var t in transitions){
-			if( el.style[t] !== undefined ){
-				window.transitionEvent = transitions[t];
-			}
-		}
-
-		// Find out what transform style is supported
-		var transforms = ["transform", "-webkit-transform", "-moz-transform", "-ms-transform", "-o-transform"];
-		for (var i = 0; i < transforms.length; i++) {
-			if (el.style[transforms[i]] !== undefined) {
-				window.transformStyle = transforms[i];
-			}
-		}
-
-		// Find out what transition style is supported
-		var transitionStyles = ["transition", "-webkit-transition", "-moz-transition", "-ms-transition", "-o-transition"];
-		for (i = 0; i < transitionStyles.length; i++) {
-			if (el.style[transitionStyles[i]] !== undefined) {
-				window.transitionStyle = transitionStyles[i];
-			}
-		}
-
-		var allPics = $(".allPics");
-
-		$(function() {
-			$(".left").click(previous);
-			$(".right").click(next);
-		});
-
-		function afterSlideLeft() {
-			allPics[0].removeEventListener(window.transitionEvent, afterSlideLeft, true);
-
-			var oldOne = $(".pic").first().remove();
-			allPics.append("<div class='pic'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
-
-			allPics.css({
-				"-webkit-transition": "",
-				"-webkit-transform": "translateX(-800px)"
-			});
-		}
-
-		function afterSlideRight() {
-			allPics[0].removeEventListener(window.transitionEvent, afterSlideRight, true);
-
-			var oldOne = $(".pic").last().remove();
-			allPics.prepend("<div class='pic'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
-
-			allPics.css({
-				"-webkit-transition": "",
-				"-webkit-transform": "translateX(-800px)"
-			});
-		}
-
-		function next() {
-			if (window.transitionEvent !== undefined) {
-				allPics[0].addEventListener(window.transitionEvent, afterSlideLeft, true);
-			}
-			else {
-				afterSlideLeft();
-			}
-
-			allPics.css({
-				"-webkit-transition": "all .7s",
-				"-webkit-transform": "translateX(-1600px)"
-			});
-		}
-
-		function previous() {
-			if (window.transitionEvent !== undefined) {
-				allPics[0].addEventListener(window.transitionEvent, afterSlideRight, true);
-			}
-			else {
-				afterSlideRight();
-			}
-
-			allPics.css({
-				"-webkit-transition": "all .7s",
-				"-webkit-transform": "translateX(0px)"
-			});
-		}
 	</script>
 	<script src="webcam-swiper-0.1.js"></script>
 </body>
