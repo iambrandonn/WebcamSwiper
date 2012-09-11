@@ -1,0 +1,64 @@
+body {
+	background: #00155f; /* Old browsers */
+	background: -moz-radial-gradient(50% 300px, ellipse cover,  #00155f 0%, #000510 65%, #000000 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, 50% 300px, 0px, center center, 100%, color-stop(0%,#00155f), color-stop(65%,#000510), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* IE10+ */
+	background: radial-gradient(ellipse at 50% 300px,  #00155f 0%,#000510 65%,#000000 100%); /* W3C */
+}
+
+.control {
+	font-size: 90px;
+	width: 96px;
+	color: white;
+	font-family: sans-serif;
+	font-weight: bold;
+	cursor: pointer;
+	vertical-align: middle;
+	display: inline-block;
+	text-shadow: 2px 4px 1px #666;
+}
+
+.pic {
+	height: 600px;
+	width: 800px;
+	font-size: 500px;
+	color: white;
+	font-family: sans-serif;
+	display: inline-block;
+	text-align: center;
+	text-shadow: 4px 6px 3px #777;
+}
+
+.cropper {
+	height: 600px;
+	width: 800px;
+	overflow-x: hidden;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.content {
+	margin: 42px auto;
+	width: 1000px;
+}
+
+.allPics {
+	height: 600px;
+	width: 2400px;
+	font-size: 0;
+	-webkit-transform: translateX(-800px);
+}
+
+.right {
+	text-align: right;
+}
+
+video {
+	display: none;
+}
+
+canvas, input {
+	vertical-align: middle;
+}
