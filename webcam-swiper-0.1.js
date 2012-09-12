@@ -13,22 +13,18 @@ var isActive = false;
 var remainingFrames = 8;
 
 navigator.webkitGetUserMedia({video: true}, function(stream) {
-	var video = $("video")[0];
-	video.src = window.webkitURL.createObjectURL(stream);
+	// Set the video elements source to the stream from the webcam
+	var videoElement = $("<video style='display:none;' autoplay></video>");
+	$("body").append(videoElement);
+	videoElement[0].src = window.webkitURL.createObjectURL(stream);
 
 	setTimeout(function() {
-		$("input").click(function() {
-			stream.stop();
-			clearInterval(refreshInterval);
-		});
-
-		horizontalResolution = video.videoWidth;
-		verticalResolution = video.videoHeight;
-
-		// if we see a frame above the frame threshold...
+		// Now that the video element has been initialized, determine the webcam resolution from it
+		horizontalResolution = videoElement[0].videoWidth;
+		verticalResolution = videoElement[0].videoHeight;
 
 		var refreshInterval = setInterval(function() {
-			greyscaleCtx.drawImage(video, 0, 0, horizontalResolution, verticalResolution, 0, 0, horizontalResolution / 2, verticalResolution / 2);
+			greyscaleCtx.drawImage(videoElement[0], 0, 0, horizontalResolution, verticalResolution, 0, 0, horizontalResolution / 2, verticalResolution / 2);
 			previousImageData = currentImageData;
 			currentImageData = deSaturate(greyscaleCtx.getImageData(0, 0, horizontalResolution / 2, verticalResolution / 2));
 			greyscaleCtx.putImageData(currentImageData, 0, 0);
@@ -41,7 +37,7 @@ navigator.webkitGetUserMedia({video: true}, function(stream) {
 					remainingFrames = 8;
 					originalWeight = currentWeight;
 				}
-			} 
+			}
 			if (isActive) {
 				if (remainingFrames <= 0) {
 					isActive = false;

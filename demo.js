@@ -19,7 +19,7 @@ function afterSlideLeft() {
 	allPics[0].removeEventListener(window.transitionEvent, afterSlideLeft, true);
 
 	var oldOne = $(".pic").first().remove();
-	allPics.append("<div class='pic'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
+	allPics.append("<div class='pic next'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
 
 	var newStyles = {};
 	newStyles[Modernizr.prefixed('transition')] = "";
@@ -31,7 +31,7 @@ function afterSlideRight() {
 	allPics[0].removeEventListener(window.transitionEvent, afterSlideRight, true);
 
 	var oldOne = $(".pic").last().remove();
-	allPics.prepend("<div class='pic'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
+	allPics.prepend("<div class='pic previous'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
 
 	var newStyles = {};
 	newStyles[Modernizr.prefixed('transition')] = "";
@@ -51,6 +51,13 @@ function next() {
 	newStyles[Modernizr.prefixed('transition')] = "all .7s";
 	newStyles[Modernizr.prefixed('transform')] = "translateX(-1600px)";
 	allPics.css(newStyles);
+
+	var current = $(".current")[0];
+	var nextPic = $(".next")[0];
+	current.classList.add("previous");
+	current.classList.remove("current");
+	nextPic.classList.add("current");
+	nextPic.classList.remove("next");
 }
 
 function previous() {
@@ -65,4 +72,11 @@ function previous() {
 	newStyles[Modernizr.prefixed('transition')] = "all .7s";
 	newStyles[Modernizr.prefixed('transform')] = "translateX(0px)";
 	allPics.css(newStyles);
+
+	var current = $(".current")[0];
+	var previousPic = $(".previous")[0];
+	current.classList.add("next");
+	current.classList.remove("current");
+	previousPic.classList.add("current");
+	previousPic.classList.remove("previous");
 }

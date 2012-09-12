@@ -1,23 +1,44 @@
 body {
-	background: #00155f; /* Old browsers */
-	background: -moz-radial-gradient(50% 300px, ellipse cover,  #00155f 0%, #000510 65%, #000000 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, 50% 300px, 0px, center center, 100%, color-stop(0%,#00155f), color-stop(65%,#000510), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(50% 300px, ellipse cover,  #00155f 0%,#000510 65%,#000000 100%); /* IE10+ */
-	background: radial-gradient(ellipse at 50% 300px,  #00155f 0%,#000510 65%,#000000 100%); /* W3C */
+	background: #ADC0CE; /* Old browsers */
+	background: -moz-radial-gradient(50% 300px, ellipse cover,  #ADC0CE 0%, #ffffff 81%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, 50% 300px, 0px, center center, 100%, color-stop(0%,#ADC0CE), color-stop(81%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(50% 300px, ellipse cover,  #ADC0CE 0%,#ffffff 81%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(50% 300px, ellipse cover,  #ADC0CE 0%,#ffffff 81%,#ffffff 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(50% 300px, ellipse cover,  #ADC0CE 0%,#ffffff 81%,#ffffff 100%); /* IE10+ */
+	background: radial-gradient(ellipse at 50% 300px,  #ADC0CE 0%,#ffffff 81%,#ffffff 100%); /* W3C */
 }
 
 .control {
 	font-size: 90px;
 	width: 96px;
-	color: white;
+	color: #F1F1F1;
 	font-family: sans-serif;
 	font-weight: bold;
 	cursor: pointer;
 	vertical-align: middle;
 	display: inline-block;
-	text-shadow: 2px 4px 1px #666;
+	text-shadow: 1px 2px 1px #A0B1BD;
+	-webkit-transition: all .7s;
+	-moz-transition: all .7s;
+	-ms-transition: all .7s;
+	-o-transition: all .7s;
+	transition: all .7s;
+}
+
+.control:hover {
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
+	text-shadow: 3px 5px 3px #01477A;
+	cursor: pointer;
+	color: white;
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
 }
 
 .pic {
@@ -28,7 +49,14 @@ body {
 	font-family: sans-serif;
 	display: inline-block;
 	text-align: center;
-	text-shadow: 4px 6px 3px #777;
+	text-shadow: 6px 8px 8px #01477A;
+	-webkit-transform: rotateY(0deg) scale(1);
+	-webkit-transition: all 1s;
+}
+
+.pic.previous, .pic.next {
+	-webkit-transform: rotateY(70deg) scale(.7);
+	-webkit-transition: all .7s;
 }
 
 .cropper {
@@ -58,10 +86,6 @@ body {
 
 .right {
 	text-align: right;
-}
-
-video {
-	display: none;
 }
 
 canvas, input {
