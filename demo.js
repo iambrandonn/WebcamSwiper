@@ -1,3 +1,5 @@
+/*global Modernizr */
+
 // Determine which transition event to listen for if supported
 var transitions = {
 	'transition':'transitionEnd',
@@ -20,11 +22,6 @@ function afterSlideLeft() {
 
 	var oldOne = $(".pic").first().remove();
 	allPics.append("<div class='pic next'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
-
-	var newStyles = {};
-	newStyles[Modernizr.prefixed('transition')] = "";
-	newStyles[Modernizr.prefixed('transform')] = "translateX(-800px)";
-	allPics.css(newStyles);
 }
 
 function afterSlideRight() {
@@ -32,11 +29,6 @@ function afterSlideRight() {
 
 	var oldOne = $(".pic").last().remove();
 	allPics.prepend("<div class='pic previous'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
-
-	var newStyles = {};
-	newStyles[Modernizr.prefixed('transition')] = "";
-	newStyles[Modernizr.prefixed('transform')] = "translateX(-800px)";
-	allPics.css(newStyles);
 }
 
 function next() {
@@ -46,11 +38,6 @@ function next() {
 	else {
 		afterSlideLeft();
 	}
-
-	var newStyles = {};
-	newStyles[Modernizr.prefixed('transition')] = "all .7s";
-	newStyles[Modernizr.prefixed('transform')] = "translateX(-1600px)";
-	allPics.css(newStyles);
 
 	var current = $(".current")[0];
 	var nextPic = $(".next")[0];
@@ -67,11 +54,6 @@ function previous() {
 	else {
 		afterSlideRight();
 	}
-
-	var newStyles = {};
-	newStyles[Modernizr.prefixed('transition')] = "all .7s";
-	newStyles[Modernizr.prefixed('transform')] = "translateX(0px)";
-	allPics.css(newStyles);
 
 	var current = $(".current")[0];
 	var previousPic = $(".previous")[0];

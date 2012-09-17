@@ -50,13 +50,41 @@ body {
 	display: inline-block;
 	text-align: center;
 	text-shadow: 6px 8px 8px #01477A;
-	-webkit-transform: rotateY(0deg) scale(1);
-	-webkit-transition: all 1s;
+	position: absolute;
+	-webkit-transform-origin: 400px 100px 400px;
+	-webkit-transition: all .5s;
+	-moz-transform-origin: 400px 100px 400px;
+	-moz-transition: all .5s;
+	-ms-transform-origin: 400px 100px 400px;
+	-ms-transition: all .5s;
+	-o-transform-origin: 400px 100px 400px;
+	-o-transition: all .5s;
+	transform-origin: 400px 100px 400px;
+	transition: all .5s;
 }
 
-.pic.previous, .pic.next {
-	-webkit-transform: rotateY(70deg) scale(.7);
-	-webkit-transition: all .7s;
+.pic.current {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+}
+
+.pic.previous {
+	-webkit-transform: rotateY(90deg) scale(.7);
+	-moz-transform: rotateY(90deg) scale(.7);
+	-o-transform: rotateY(90deg) scale(.7);
+	-ms-transform: rotateY(90deg) scale(.7);
+	transform: rotateY(90deg) scale(.7);
+}
+
+.pic.next {
+	-webkit-transform: rotateY(-90deg) scale(.7);
+	-moz-transform: rotateY(-90deg) scale(.7);
+	-o-transform: rotateY(-90deg) scale(.7);
+	-ms-transform: rotateY(-90deg) scale(.7);
+	transform: rotateY(-90deg) scale(.7);
 }
 
 .cropper {
@@ -76,12 +104,6 @@ body {
 	height: 600px;
 	width: 2400px;
 	font-size: 0;
-
-	-webkit-transform: translateX(-800px);
-	-o-transform: translateX(-800px);
-	-moz-transform: translateX(-800px);
-	-ms-transform: translateX(-800px);
-	transform: translateX(-800px);
 }
 
 .right {
