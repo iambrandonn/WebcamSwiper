@@ -11,6 +11,7 @@ var transitions = {
 window.transitionEvent = transitions[Modernizr.prefixed('transition')];
 
 var allPics = $(".allPics");
+var isMoving = false;
 
 $(function() {
 	$(".left").click(previous);
@@ -22,6 +23,8 @@ function afterSlideLeft() {
 
 	var oldOne = $(".pic").first().remove();
 	allPics.append("<div class='pic next'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
+
+	isMoving = false;
 }
 
 function afterSlideRight() {
@@ -29,36 +32,46 @@ function afterSlideRight() {
 
 	var oldOne = $(".pic").last().remove();
 	allPics.prepend("<div class='pic previous'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
+
+	isMoving = false;
 }
 
 function next() {
-	if (window.transitionEvent !== undefined) {
-		allPics[0].addEventListener(window.transitionEvent, afterSlideLeft, true);
-	}
-	else {
-		afterSlideLeft();
-	}
+	if (!isMoving) {
+		isMoving = true;
 
-	var current = $(".current")[0];
-	var nextPic = $(".next")[0];
-	current.classList.add("previous");
-	current.classList.remove("current");
-	nextPic.classList.add("current");
-	nextPic.classList.remove("next");
+		if (window.transitionEvent !== undefined) {
+			allPics[0].addEventListener(window.transitionEvent, afterSlideLeft, true);
+		}
+		else {
+			afterSlideLeft();
+		}
+
+		var current = $(".current")[0];
+		var nextPic = $(".next")[0];
+		current.classList.add("previous");
+		current.classList.remove("current");
+		nextPic.classList.add("current");
+		nextPic.classList.remove("next");
+	}
 }
 
 function previous() {
-	if (window.transitionEvent !== undefined) {
-		allPics[0].addEventListener(window.transitionEvent, afterSlideRight, true);
-	}
-	else {
-		afterSlideRight();
-	}
+	if (!isMoving) {
+		isMoving = true;
 
-	var current = $(".current")[0];
-	var previousPic = $(".previous")[0];
-	current.classList.add("next");
-	current.classList.remove("current");
-	previousPic.classList.add("current");
-	previousPic.classList.remove("previous");
+		if (window.transitionEvent !== undefined) {
+			allPics[0].addEventListener(window.transitionEvent, afterSlideRight, true);
+		}
+		else {
+			afterSlideRight();
+		}
+
+		var current = $(".current")[0];
+		var previousPic = $(".previous")[0];
+		current.classList.add("next");
+		current.classList.remove("current");
+		previousPic.classList.add("current");
+		previousPic.classList.remove("previous");
+	}
 }
