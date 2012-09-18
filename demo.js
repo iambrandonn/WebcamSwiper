@@ -19,19 +19,19 @@ $(function() {
 });
 
 function afterSlideLeft() {
-	allPics[0].removeEventListener(window.transitionEvent, afterSlideLeft, true);
+	$(".book")[0].removeEventListener(window.transitionEvent, afterSlideLeft, true);
 
 	var oldOne = $(".pic").first().remove();
-	allPics.append("<div class='pic next'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
+	$(".book").append("<div class='pic next'>" + (parseInt(oldOne.text(), 10) + 3) + "</div>");
 
 	isMoving = false;
 }
 
 function afterSlideRight() {
-	allPics[0].removeEventListener(window.transitionEvent, afterSlideRight, true);
+	$(".book")[0].removeEventListener(window.transitionEvent, afterSlideRight, true);
 
 	var oldOne = $(".pic").last().remove();
-	allPics.prepend("<div class='pic previous'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
+	$(".book").prepend("<div class='pic previous'>" + (parseInt(oldOne.text(), 10) - 3) + "</div>");
 
 	isMoving = false;
 }
@@ -41,7 +41,7 @@ function next() {
 		isMoving = true;
 
 		if (window.transitionEvent !== undefined) {
-			allPics[0].addEventListener(window.transitionEvent, afterSlideLeft, true);
+			$(".book")[0].addEventListener(window.transitionEvent, afterSlideLeft, true);
 		}
 		else {
 			afterSlideLeft();
@@ -61,7 +61,7 @@ function previous() {
 		isMoving = true;
 
 		if (window.transitionEvent !== undefined) {
-			allPics[0].addEventListener(window.transitionEvent, afterSlideRight, true);
+			$(".book")[0].addEventListener(window.transitionEvent, afterSlideRight, true);
 		}
 		else {
 			afterSlideRight();

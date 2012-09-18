@@ -52,14 +52,14 @@ body {
 	text-shadow: 6px 8px 8px #01477A;
 	position: absolute;
 	-webkit-transform-origin: 400px 100px 400px;
-	-webkit-transition: all .5s;
 	-moz-transform-origin: 400px 100px 400px;
-	-moz-transition: all .5s;
 	-ms-transform-origin: 400px 100px 400px;
-	-ms-transition: all .5s;
 	-o-transform-origin: 400px 100px 400px;
-	-o-transition: all .5s;
 	transform-origin: 400px 100px 400px;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
 	transition: all .5s;
 }
 
@@ -87,23 +87,16 @@ body {
 	transform: rotateY(-90deg) scale(.7);
 }
 
-.cropper {
-	height: 600px;
-	width: 800px;
-	overflow-x: hidden;
+.book {
 	display: inline-block;
+	width: 800px;
 	vertical-align: middle;
+	height: 600px;
 }
 
 .content {
 	margin: 42px auto;
 	width: 1000px;
-}
-
-.allPics {
-	height: 600px;
-	width: 2400px;
-	font-size: 0;
 }
 
 .right {
