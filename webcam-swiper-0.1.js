@@ -79,7 +79,7 @@ function getDeltas(previous, current) {
 		deltasData[i+3] = 255;
 	}
 
-	console.log(currentWeight);
+//	console.log(currentWeight);
 	return deltas;
 }
 
