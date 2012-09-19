@@ -2,6 +2,11 @@ body {
 	background: url('wood.jpg');
 }
 
+.content {
+	margin: 42px auto;
+	width: 1010px;
+}
+
 .control {
 	font-size: 90px;
 	width: 96px;
@@ -33,6 +38,14 @@ body {
 	-o-transform: scale(1.2);
 	-ms-transform: scale(1.2);
 	transform: scale(1.2);
+}
+
+.right {
+	text-align: right;
+}
+
+canvas, input {
+	vertical-align: middle;
 }
 
 .page {
@@ -89,12 +102,9 @@ body {
 	width: 800px;
 	vertical-align: middle;
 	height: 600px;
-	border-color: #534927;
+	border-color: #533327;
 	border-style: solid;
-	border-bottom-width: 10px;
-	border-left-width: 5px;
-	border-right-width: 5px;
-	border-top-width: 2px;
+	border-width: 2px 5px 10px 5px;
 	box-shadow: 3px 5px 5px #2B1F00;
 	border-radius: 1px;
 	position: relative;
@@ -103,76 +113,60 @@ body {
 	perspective: 2000px;
 }
 
-.one {
-	z-index: 11;
+.one, .three {
 	-webkit-transform: rotateY(-180deg);
 	-moz-transform: rotateY(-180deg);
 	-o-transform: rotateY(-180deg);
 	-ms-transform: rotateY(-180deg);
 	transform: rotateY(-180deg);
+}
+
+.two, .four, .five, .seven {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+}
+
+.six, .eight {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+.one {
+	z-index: 11;
 }
 
 .two {
 	z-index: 12;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	-o-transform: rotateY(0deg);
-	-ms-transform: rotateY(0deg);
-	transform: rotateY(0deg);
 }
 
 .three {
 	z-index: 15;
-	-webkit-transform: rotateY(-180deg);
-	-moz-transform: rotateY(-180deg);
-	-o-transform: rotateY(-180deg);
-	-ms-transform: rotateY(-180deg);
-	transform: rotateY(-180deg);
 }
 
 .four {
 	z-index: 16;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	-o-transform: rotateY(0deg);
-	-ms-transform: rotateY(0deg);
-	transform: rotateY(0deg);
 }
 
 .five {
 	z-index: 17;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	-o-transform: rotateY(0deg);
-	-ms-transform: rotateY(0deg);
-	transform: rotateY(0deg);
 }
 
 .six {
 	z-index: 18;
-	-webkit-transform: rotateY(180deg);
-	-moz-transform: rotateY(180deg);
-	-o-transform: rotateY(180deg);
-	-ms-transform: rotateY(180deg);
-	transform: rotateY(180deg);
 }
 
 .seven {
 	z-index: 13;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	-o-transform: rotateY(0deg);
-	-ms-transform: rotateY(0deg);
-	transform: rotateY(0deg);
 }
 
 .eight {
 	z-index: 14;
-	-webkit-transform: rotateY(180deg);
-	-moz-transform: rotateY(180deg);
-	-o-transform: rotateY(180deg);
-	-ms-transform: rotateY(180deg);
-	transform: rotateY(180deg);
 }
 
 .divider {
@@ -192,17 +186,4 @@ body {
 	width: 185px;
 	height: 99px;
 	float: left;
-}
-
-.content {
-	margin: 42px auto;
-	width: 1010px;
-}
-
-.right {
-	text-align: right;
-}
-
-canvas, input {
-	vertical-align: middle;
 }
