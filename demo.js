@@ -20,6 +20,11 @@ $(function() {
 	$(".right").click(next);
 });
 
+// $("body")[0].addEventListener("webcamSwipeLeft", next, true);
+// $("body")[0].addEventListener("webcamSwipeRight", previous, true);
+$.webcamSwipeLeft(next);
+$.webcamSwipeRight(previous);
+
 function next() {
 	if (!isMoving) {
 		isMoving = true;
