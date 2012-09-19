@@ -175,6 +175,25 @@ body {
 	transform: rotateY(180deg);
 }
 
+.divider {
+	height: 14px;
+	display: block;
+	margin: 7px auto;
+	width: 128px;
+}
+
+.tree {
+	width: 100px;
+	height: 121px;
+	float: right;
+}
+
+.plow {
+	width: 185px;
+	height: 99px;
+	float: left;
+}
+
 .content {
 	margin: 42px auto;
 	width: 1010px;
