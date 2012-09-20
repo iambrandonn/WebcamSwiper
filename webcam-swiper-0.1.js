@@ -12,7 +12,15 @@ if (jQuery !== undefined) {
 	})( jQuery );
 }
 
-navigator.webkitGetUserMedia({video: true}, function(stream) {
+
+if (navigator.getUserMedia !== undefined) {
+	navigator.getUserMedia({video: true}, processWebcamStream);
+}
+else if (navigator.webkitGetUserMedia !== undefined) {
+	navigator.webkitGetUserMedia({video: true}, processWebcamStream);
+}
+
+function processWebcamStream (stream) {
 	var PIXEL_CHANGE_THRESHOLD = 30;
 	var FRAME_THRESHOLD = 30000;
 	var greyscaleCtx = document.getElementById("cnvs").getContext("2d");
@@ -119,4 +127,4 @@ navigator.webkitGetUserMedia({video: true}, function(stream) {
 			}
 		}, 1000/15);
 	}, 1000);
-});
+}
