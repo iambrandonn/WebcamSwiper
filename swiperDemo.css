@@ -5,12 +5,13 @@ body {
 
 .content {
 	margin: 42px auto;
-	width: 1010px;
+	width: 100%;
+	max-width: 1010px;
 }
 
 .control {
 	font-size: 90px;
-	width: 96px;
+	width: 8%;
 	color: #D5A66C;
 	font-family: sans-serif;
 	font-weight: bold;
@@ -23,6 +24,11 @@ body {
 	-ms-transition: all .7s;
 	-o-transition: all .7s;
 	transition: all .7s;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;	
 }
 
 .control:hover {
@@ -31,9 +37,9 @@ body {
 	-ms-transition: all .3s;
 	-o-transition: all .3s;
 	transition: all .3s;
-	text-shadow: 3px 5px 10px #5A5341;
+	text-shadow: 3px 5px 3px #3D382A;
 	cursor: pointer;
-	color: #D5A66C;
+	color: #BD9462;
 	-webkit-transform: scale(1.2);
 	-moz-transform: scale(1.2);
 	-o-transform: scale(1.2);
@@ -51,8 +57,8 @@ canvas, input {
 
 .page {
 	position: absolute;
-	height: 540px;
-	width: 340px;
+	height: 100%;
+	width: 50%;
 	font-size: 14px;
 	color: #222;
 	background-color: white;
@@ -63,6 +69,105 @@ canvas, input {
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 450px) {
+	.page {
+		font-size: 7px;
+		padding: 15px;
+	}
+
+	.control {
+		font-size: 45px;
+		width: 7%;
+	}	
+}
+
+@media screen and (min-width: 451px) and (max-width: 515px) {
+	.page {
+		font-size: 7px;
+		padding: 16px;
+	}
+
+	.control {
+		font-size: 51px;
+		width: 7%;
+	}	
+}
+
+@media screen and (min-width: 516px) and (max-width: 579px) {
+	.page {
+		font-size: 8px;
+		padding: 18px;
+	}
+
+	.control {
+		font-size: 56px;
+		width: 7%;
+	}	
+}
+
+@media screen and (min-width: 580px) and (max-width: 600px) {
+	.page {
+		font-size: 9px;
+		padding: 20px;
+	}
+
+	.control {
+		font-size: 62px;
+	}	
+}
+
+@media screen and (min-width: 601px) and (max-width: 675px) {
+	.page {
+		font-size: 10px;
+		padding: 22px;
+	}
+
+	.control {
+		font-size: 68px;
+	}	
+}
+
+@media screen and (min-width: 676px) and (max-width: 715px) {
+	.page {
+		font-size: 11px;
+		padding: 24px;
+	}
+
+	.control {
+		font-size: 74px;
+	}	
+}
+
+@media screen and (min-width: 716px) and (max-width: 755px) {
+	.page {
+		font-size: 12px;
+		padding: 26px;
+	}
+
+	.control {
+		font-size: 80px;
+	}	
+}
+
+@media screen and (min-width: 756px) and (max-width: 797px) {
+	.page {
+		font-size: 13px;
+		padding: 28px;
+	}
+
+	.control {
+		font-size: 85px;
+	}	
+}
+
+.pageContents {
+	overflow: hidden;
+	height: 100%;
 }
 
 .two, .four, .six, .eight {
@@ -88,7 +193,7 @@ canvas, input {
 	-o-transform-origin: 0 0 0;
 	transform-origin: 0 0 0;
 
-	left: 400px;
+	left: 50%;
 	background: #878278; /* Old browsers */
 	background: -moz-linear-gradient(left, #878278 0%, #cec7b7 1%, #eae2ce 6%, #ffffff 18%, #ffffff 81%, #fff7ea 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#878278), color-stop(1%,#cec7b7), color-stop(6%,#eae2ce), color-stop(18%,#ffffff), color-stop(81%,#ffffff), color-stop(100%,#fff7ea)); /* Chrome,Safari4+ */
@@ -100,7 +205,7 @@ canvas, input {
 
 .book {
 	display: inline-block;
-	width: 800px;
+	width: 79%;
 	vertical-align: middle;
 	height: 600px;
 	border-color: #533327;
@@ -195,6 +300,7 @@ canvas, input {
 	-ms-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
 	transform: rotateY(180deg);
+	display: none;
 }
 
 .instructions {

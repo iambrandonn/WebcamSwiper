@@ -18,6 +18,18 @@ $(function() {
 	// Hook up the buttons
 	$(".left").click(previous);
 	$(".right").click(next);
+
+	// Show fail message if browser doesn't support getUserMedia
+	if (navigator.getUserMedia === undefined) {
+		$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
+		$(".instructions").css("color", "red");
+	}
+
+	$(".book").height($(".book").width() * 0.75);
+
+	$(window).resize(function() {
+		$(".book").height($(".book").width() * 0.75);
+	});
 });
 
 // $("body")[0].addEventListener("webcamSwipeLeft", next, true);
