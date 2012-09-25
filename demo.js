@@ -16,8 +16,17 @@ var isMoving = false;
 
 // Show fail message if browser doesn't support getUserMedia
 if (navigator.getUserMedia === undefined) {
-	$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
 	$(".instructions").css("color", "red");
+	if (!Modernizr.csstransforms3d) {
+		$(".instructions").text("Your browser/hardware doesn't support hardware accelerated 3D CSS. The page may not work well.  Your browser also doesn't support getUserMedia().  Try using the latest version of Chrome.");
+	}
+	else {
+		$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
+	}
+}
+else if (!Modernizr.csstransforms3d) {
+	$(".instructions").css("color", "red");
+	$(".instructions").text("Your browser/hardware doesn't support hardware accelerated 3D CSS. The page may not work well.");
 }
 
 $(function() {
