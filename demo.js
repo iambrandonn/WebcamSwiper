@@ -14,16 +14,16 @@ window.transformStyle = Modernizr.prefixed('transform').replace(/([A-Z])/g, func
 
 var isMoving = false;
 
+// Show fail message if browser doesn't support getUserMedia
+if (navigator.getUserMedia === undefined) {
+	$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
+	$(".instructions").css("color", "red");
+}
+
 $(function() {
 	// Hook up the buttons
 	$(".left").click(previous);
 	$(".right").click(next);
-
-	// Show fail message if browser doesn't support getUserMedia
-	if (navigator.getUserMedia === undefined) {
-		$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
-		$(".instructions").css("color", "red");
-	}
 
 	$(".book").height($(".book").width() * 0.75);
 
@@ -32,10 +32,10 @@ $(function() {
 	});
 });
 
-// $("body")[0].addEventListener("webcamSwipeLeft", next, true);
-// $("body")[0].addEventListener("webcamSwipeRight", previous, true);
-$.webcamSwipeLeft(next);
-$.webcamSwipeRight(previous);
+// document.getElementsByTagName("body")[0].addEventListener("webcamSwipeLeft", next, true);
+// document.getElementsByTagName("body")[0].addEventListener("webcamSwipeRight", previous, true);
+$("body").bind("webcamSwipeLeft", next);
+$("body").bind("webcamSwipeRight", previous);
 
 function next() {
 	if (!isMoving) {
@@ -130,3 +130,5 @@ function reAssignPageNumbers() {
 	$(".book > div")[6].classList.add("seven");
 	$(".book > div")[7].classList.add("eight");
 }
+
+window.initializeWebcamSwiper();
