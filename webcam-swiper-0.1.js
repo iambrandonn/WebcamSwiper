@@ -24,10 +24,14 @@ function initializeWebcamSwiper() {
 		videoElement.src = window.URL.createObjectURL(stream);
 
 		// Wait for the video element to initialize
-		setTimeout(function() {
+		videoElement.addEventListener("canplay", function() {
 			// Now that the video element has been initialized, determine the webcam resolution from it
 			var horizontalResolution = videoElement.videoWidth;
 			var verticalResolution = videoElement.videoHeight;
+
+			if (horizontalResolution < 1 || horizontalResolution > 4000) {
+				alert("Webcam error.  Try reloading the page.");
+			}
 
 			var canvasWidth = horizontalResolution > 320 ? 320 : horizontalResolution;
 			var canvasHeight = verticalResolution > 240 ? 240 : verticalResolution;
@@ -181,7 +185,7 @@ function initializeWebcamSwiper() {
 
 				return value / theData.length;
 			}
-		}, 1000);
+		});
 	});
 }
 
