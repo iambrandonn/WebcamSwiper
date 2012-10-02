@@ -15,7 +15,8 @@ function initializeWebcamSwiper() {
 
 		// Create a video element and set its source to the stream from the webcam
 		var videoElement = document.createElement("video");
-		videoElement.style.display = "none";
+		videoElement.style.position = "absolute";
+		videoElement.style.left = "-1000px";
 		videoElement.autoplay = true;
 		document.getElementsByTagName("body")[0].appendChild(videoElement);
 		if (window.URL === undefined) {
@@ -181,7 +182,7 @@ function initializeWebcamSwiper() {
 
 				return value / theData.length;
 			}
-		}, 1000);
+		}, 5000);
 	});
 }
 
