@@ -181,7 +181,7 @@ function initializeWebcamSwiper() {
 
 				return value / theData.length;
 			}
-		}, 1000);
+		}, 5000);
 	});
 }
 
