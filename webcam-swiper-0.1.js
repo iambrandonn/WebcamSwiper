@@ -150,7 +150,7 @@ function initializeWebcamSwiper() {
 				var i = 0;
 				while (i < dataLength) {
 					if (Math.abs(previousData[i] - currentData[i]) > PIXEL_CHANGE_THRESHOLD) {
-						motionWeight += ((i / 4) % canvasWidth) - (canvasWidth / 2);
+						motionWeight += (((i / 4) % canvasWidth) == 0 ? ((i-1) / 4 % canvasWidth) : ((i / 4) % canvasWidth)- (canvasWidth / 2)); 
 
 					}
 					i += 4;
@@ -177,6 +177,7 @@ function initializeWebcamSwiper() {
 
 					// Fully opaque
 					newData[i+3] = 255;
+					// returning an average intensity of all pixels.  Used for calibrating sensitivity based on room light level.
 					lightLevel += newData[i]; //combining the light level in the samefunction
 					i += 4;
 
