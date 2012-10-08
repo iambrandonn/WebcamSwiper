@@ -71,12 +71,12 @@ function initializeWebcamSwiper() {
 
 				// Desaturate it
 				var deSaturated = deSaturate(greyscaleCtx.getImageData(0, 0, canvasWidth, canvasHeight));
-				currentImageData = deSaturated[0];
+				currentImageData = deSaturated.pop();
 
 				// Make adjustments for light level and system speed
 				if (scanCount % 50 === 0) {
 					// Calibrate based on the current light level, if we haven't already
-					lightLevel = deSaturated[1];
+					lightLevel = deSaturated.pop();
 					if (lightLevel > 0 && lightLevel <= 1) {
 						PIXEL_CHANGE_THRESHOLD = 25;
 						FRAME_THRESHOLD = 3000;
@@ -147,13 +147,13 @@ function initializeWebcamSwiper() {
 				var previousData = previous.data;
 				var currentData = current.data;
 				var dataLength = previousData.length;
-				var i = 0;
-				while (i < dataLength) {
+				var i = dataLength-1;
+				while (i >= 0) {
 					if (Math.abs(previousData[i] - currentData[i]) > PIXEL_CHANGE_THRESHOLD) {
 						motionWeight += (((i / 4) % canvasWidth) == 0 ? ((i-1) / 4 % canvasWidth) : ((i / 4) % canvasWidth)- (canvasWidth / 2)); 
 
 					}
-					i += 4;
+					i -= 4;
 				}
 				
 				return motionWeight;
@@ -167,10 +167,10 @@ function initializeWebcamSwiper() {
 
 				// Iterate through each pixel, desaturating it
 				var dataLength = theData.length;
-				var i = 0;
+				var i = dataLength-1;
 				var lightLevel;
 				 
-				while ( i < dataLength) {
+				while ( i >= 0) {
 					// To find the desaturated value, average the brightness of the red, green, and blue values
 					var average = (theData[i] + theData[i + 1] + theData[i + 2]) / 3;
 					newData[i] = newData[i+1] = newData[i+2] = average;
@@ -179,11 +179,11 @@ function initializeWebcamSwiper() {
 					newData[i+3] = 255;
 					// returning an average intensity of all pixels.  Used for calibrating sensitivity based on room light level.
 					lightLevel += newData[i]; //combining the light level in the samefunction
-					i += 4;
+					i -= 4;
 
 				}
 
-				return [newImageData, lightLevel/dataLength];
+				return [lightLevel/dataLength,newImageData];
 			}
 
 			// Will return the average intensity of all pixels.  Used for calibrating sensitivity based on room light level.
