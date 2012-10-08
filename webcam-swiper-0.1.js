@@ -12,6 +12,7 @@ function initializeWebcamSwiper() {
 
 	navigator.getUserMedia({video: true}, function (stream) {
 		window.webcamSwiperStream = stream;
+		window.webcamSwiperOn = true;
 
 		// Create a video element and set its source to the stream from the webcam
 		var videoElement = document.createElement("video");
@@ -69,12 +70,13 @@ function initializeWebcamSwiper() {
 				greyscaleCtx.drawImage(videoElement, 0, 0, horizontalResolution, verticalResolution, 0, 0, canvasWidth, canvasHeight);
 
 				// Desaturate it
-				currentImageData = deSaturate(greyscaleCtx.getImageData(0, 0, canvasWidth, canvasHeight));
+				var deSaturated = deSaturate(greyscaleCtx.getImageData(0, 0, canvasWidth, canvasHeight));
+				currentImageData = deSaturated.pop();
 
 				// Make adjustments for light level and system speed
 				if (scanCount % 50 === 0) {
 					// Calibrate based on the current light level, if we haven't already
-					lightLevel = getLightLevel(currentImageData);
+					lightLevel = deSaturated.pop();
 					if (lightLevel > 0 && lightLevel <= 1) {
 						PIXEL_CHANGE_THRESHOLD = 25;
 						FRAME_THRESHOLD = 3000;
@@ -135,9 +137,9 @@ function initializeWebcamSwiper() {
 			}
 
 			function fireSwipeEvent(eventName) {
-				var swipeLeftEvent = document.createEvent("UIEvents");
-				swipeLeftEvent.initEvent(eventName, false, false);
-				document.getElementsByTagName("body")[0].dispatchEvent(swipeLeftEvent);
+				var swipeEvent = document.createEvent("UIEvents");
+				swipeEvent.initEvent(eventName, false, false);
+				document.getElementsByTagName("body")[0].dispatchEvent(swipeEvent);
 			}
 
 			function getMotionWeight (previous, current) {
@@ -145,11 +147,15 @@ function initializeWebcamSwiper() {
 				var previousData = previous.data;
 				var currentData = current.data;
 				var dataLength = previousData.length;
-				for (var i = 0; i < dataLength; i += 4) {
+				var i = dataLength-1;
+				while (i >= 0) {
 					if (Math.abs(previousData[i] - currentData[i]) > PIXEL_CHANGE_THRESHOLD) {
-						motionWeight += ((i / 4) % canvasWidth) - (canvasWidth / 2);
+						motionWeight += (((i / 4) % canvasWidth) == 0 ? ((i-1) / 4 % canvasWidth) : ((i / 4) % canvasWidth)- (canvasWidth / 2)); 
+
 					}
+					i -= 4;
 				}
+				
 				return motionWeight;
 			}
 
@@ -161,30 +167,39 @@ function initializeWebcamSwiper() {
 
 				// Iterate through each pixel, desaturating it
 				var dataLength = theData.length;
-				for (var i = 0; i < dataLength; i += 4) {
+				var i = dataLength-1;
+				var lightLevel;
+				 
+				while ( i >= 0) {
 					// To find the desaturated value, average the brightness of the red, green, and blue values
 					var average = (theData[i] + theData[i + 1] + theData[i + 2]) / 3;
 					newData[i] = newData[i+1] = newData[i+2] = average;
 
 					// Fully opaque
 					newData[i+3] = 255;
+					// returning an average intensity of all pixels.  Used for calibrating sensitivity based on room light level.
+					lightLevel += newData[i]; //combining the light level in the samefunction
+					i -= 4;
+
 				}
 
-				return newImageData;
+				return [lightLevel/dataLength,newImageData];
 			}
 
 			// Will return the average intensity of all pixels.  Used for calibrating sensitivity based on room light level.
-			function getLightLevel (imageData) {
-				var theData = imageData.data;
-				var dataLength = theData.length;
+			// function getLightLevel (imageData) {
+			// 	var theData = imageData.data;
+			// 	var dataLength = theData.length;
+			// 	var value = 0;
+			// 	var i = 0;
 
-				var value = 0;
-				for (var i = 0; i < dataLength; i += 4) {
-					value += theData[i];
-				}
+			// 	while (i < dataLength) {
+			// 		value += theData[i];
+			// 		i += 4
+			// 	}
 
-				return value / theData.length;
-			}
+			// 	return value / dataLength;
+			// }
 		});
 	});
 }
@@ -198,4 +213,5 @@ function destroyWebcamSwiper() {
 		window.webcamSwiperStream.stop();
 		window.webcamSwiperStream = undefined;
 	}
+	window.webcamSwiperOn = false;
 }
