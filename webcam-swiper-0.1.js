@@ -1,6 +1,6 @@
-/*global console */
+/*global console, alert */
 
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || undefined;
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || undefined;
 
 function initializeWebcamSwiper() {
 	if (navigator.getUserMedia === undefined) {
@@ -10,21 +10,27 @@ function initializeWebcamSwiper() {
 		}
 	}
 
-	navigator.getUserMedia({video: true}, function (stream) {
+	navigator.getUserMedia({video: true, audio: false}, function (stream) {
 		window.webcamSwiperStream = stream;
 
 		// Create a video element and set its source to the stream from the webcam
 		var videoElement = document.createElement("video");
 		videoElement.style.display = "none";
-		videoElement.autoplay = true;
 		document.getElementsByTagName("body")[0].appendChild(videoElement);
 		if (window.URL === undefined) {
 			window.URL = window.webkitURL;
 		}
-		videoElement.src = window.URL.createObjectURL(stream);
+
+		if (videoElement.mozSrcObject !== undefined) {
+			videoElement.mozSrcObject = stream;
+		}
+		else {
+			videoElement.src = window.URL.createObjectURL(stream);
+		}
+		videoElement.play();
 
 		// Wait for the video element to initialize
-		videoElement.addEventListener("canplay", function() {
+		videoElement.addEventListener("loadeddata", function() {
 			// Now that the video element has been initialized, determine the webcam resolution from it
 			var horizontalResolution = videoElement.videoWidth;
 			var verticalResolution = videoElement.videoHeight;
@@ -186,6 +192,8 @@ function initializeWebcamSwiper() {
 				return value / theData.length;
 			}
 		});
+	}, function(err) {
+		console('Something went wrong in getUserMedia');
 	});
 }
 

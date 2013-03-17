@@ -14,14 +14,18 @@ window.transformStyle = Modernizr.prefixed('transform').replace(/([A-Z])/g, func
 
 var isMoving = false;
 
-// Show fail message if browser doesn't support getUserMedia
-if (navigator.getUserMedia === undefined) {
+// Firefox
+if ($.browser.mozilla && +($.browser.version) < 20) {
+	$(".instructions").css("color", "red");
+	$(".instructions").text('In order for this page to work in Firefox version 19 or lower you will need to go to about:config and turn on the media.navigator.enabled flag.');
+}
+else if (navigator.getUserMedia === undefined) {
 	$(".instructions").css("color", "red");
 	if (!Modernizr.csstransforms3d) {
-		$(".instructions").text("Your browser/hardware doesn't support hardware accelerated 3D CSS. The page may not work well.  Your browser also doesn't support getUserMedia().  Try using the latest version of Chrome.");
+		$(".instructions").text("Your browser/hardware doesn't support hardware accelerated 3D CSS. The page may not work well.  Your browser also doesn't support getUserMedia().  Try using the latest version of Chrome or Firefox 20+.");
 	}
 	else {
-		$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome.");
+		$(".instructions").text("Your browser doesn't support getUserMedia().  Try using the latest version of Chrome or Firefox 20+.");
 	}
 }
 else if (!Modernizr.csstransforms3d) {
