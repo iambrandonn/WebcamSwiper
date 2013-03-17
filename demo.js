@@ -2,7 +2,7 @@
 
 // Determine which transition event to listen for if supported
 var transitions = {
-	'transition':'transitionEnd',
+	'transition':'transitionend',
 	'OTransition':'oTransitionEnd',
 	'MSTransition':'msTransitionEnd',
 	'MozTransition':'transitionend',
@@ -80,7 +80,7 @@ function afterNextPageShowing() {
 	// move extra pages to end so we can move infintely either direction
 	$(".book").append($(".one"));
 	$(".book").append($(".two"));
- 
+
 	reAssignPageNumbers();
 
 	// We're done, more events can be processed now
